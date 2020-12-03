@@ -2,17 +2,15 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/school'
 
-class SchoolTest < Minitest::Test
+class School::School < Minitest::Test
   #Iteration 1 Tests:
   def test_it_exists
     school = School.new('9:00', 7)
-
     assert_instance_of School, school
   end
 
   def test_it_has_start_time
     school = School.new('9:00', 7)
-
     assert_equal '9:00', school.start_time
   end
 
@@ -46,4 +44,21 @@ class SchoolTest < Minitest::Test
     assert_equal '16:00', school1.end_time
     assert_equal '12:00', school2.end_time
   end
+
+  def test_is_full_time
+    school1 = School.new('9:00', 7)
+    school2 = School.new('9:00', 3)
+
+    assert_equal true, school1.is_full_time?
+    assert_equal false, school2.is_full_time?
+  end
+
+  def test_returns_standard_student_names
+    school = School.new('9:00', 7)
+
+    school.add_student_name('Aurora')
+    school.add_student_name('tim')
+    school.add_student_name('megan')
+
+    assert_equal ["Aurora", "Tim", "Megan"]
 end
